@@ -68,11 +68,13 @@ class Emprunteur(val nom: String, var fiabilite: Double)
     // Une liste pour stocker les prêts en cours de cet emprunteur
     val prets = mutableListOf<Pret>()
 
+    val conf = config()
+
     // Une méthode pour emprunter une somme d'argent
     fun emprunter(montant: Double, DateRemb: Date)
     {
         // Vérifier que le montant est inférieur ou égal à 100
-        if (montant <= 100)
+        if (montant <= conf.montantMaxEmprunt)
         {
             // Créer un nouveau prêt avec le montant et la date actuelle
             val pret = Pret(montant, DateRemb)
@@ -81,12 +83,12 @@ class Emprunteur(val nom: String, var fiabilite: Double)
             prets.add(pret)
 
             // Afficher un message de confirmation
-            println("Vous avez emprunté $montant dollars.")
+            println("Vous avez emprunté $montant Fcfa.")
         }
         else
         {
             // Afficher un message d'erreur
-            println("Vous ne pouvez pas emprunter plus de 100 dollars.")
+            println("Vous ne pouvez pas emprunter plus de ${conf.montantMaxEmprunt} Fcfa.")
         }
     }
     // Une méthode pour rembourser un prêt
@@ -145,7 +147,7 @@ class Pret(val montant: Double, var dateRemb: Date)
 
     //montant qu'il faudra rembourser
     var montantAremb:Int = ceil(montant * (1 + semaines.toDouble()
-            * conf.tauxInteret * conf.dureeEmprunt.toDouble())).toInt()
+            * conf.tauxInteret/conf.dureeEmprunt.toDouble())).toInt()
 }
 
 // Une classe pour représenter un prêteur sur gage
@@ -215,5 +217,5 @@ class config()
 {
     val montantMaxEmprunt:Int = 50000  // Fcfa
     val tauxInteret : Double = 0.05    // Pourcent
-    val dureeEmprunt : Int = 1         // Semaines
+    val dureeEmprunt : Int = 1         // Semaines (durée d'applicabilité du porcentage)
 }

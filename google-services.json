@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "215918689599",
+    "project_id": "qlikway",
+    "storage_bucket": "qlikway.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215918689599:android:b64b95eaf5feab72aa678a",
+        "android_client_info": {
+          "package_name": "com.example.qlikway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215918689599-pjqbjgj41o841k79i2r1s9esbmi3t1cb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClZ3TXHxc1MoDdBpGqKFfIF48J2EVqzbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215918689599-pjqbjgj41o841k79i2r1s9esbmi3t1cb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

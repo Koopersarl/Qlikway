@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity()
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+
 }
 
 // Une classe pour représenter un emprunteur
@@ -130,7 +132,7 @@ class Pret(val montant: Double, var dateRemb: Date)
         val aujourdHui = Date()
 
         // Calculer la différence en millisecondes entre les deux dates
-        val difference = aujourdHui.time -dateRemb.time
+        val difference = aujourdHui.time - dateRemb.time
 
         // Convertir la différence en semaines (en arrondissant au supérieur)
         val sem = ceil((difference / (1000 * 60 * 60 * 24 * 7)).toDouble()).toInt()

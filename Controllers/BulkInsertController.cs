@@ -158,9 +158,8 @@ namespace FtpBulkInsert.Controllers
                     return Unauthorized(new { message = "Clé API invalide" });
                 }
 
-                // Cette méthode pourrait être implémentée dans LogService
-                // Pour l'instant, on retourne un message
-                return Ok(new { message = "Consultez directement la table UploadLog dans votre base de données" });
+                var logs = await _logService.GetRecentLogsAsync(count);
+                return Ok(logs);
             }
             catch (Exception ex)
             {

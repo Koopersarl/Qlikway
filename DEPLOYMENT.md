@@ -117,6 +117,20 @@ Via FTP, créez un dossier `/csv` à la racine de votre FTP (ou utilisez le chem
 
 ### 6.1 Vérifier que l'application fonctionne
 
+#### Option 1 : Via l'interface web
+
+Ouvrez votre navigateur et accédez à :
+```
+https://votre-site.smarterasp.net/manage
+```
+
+Vous devriez voir l'interface de gestion avec :
+- Section d'upload manuel de fichiers CSV
+- Section de déclenchement d'import FTP
+- Historique des imports en bas de page
+
+#### Option 2 : Via l'API (ligne de commande)
+
 ```bash
 curl https://votre-site.smarterasp.net/api/bulkinsert/health
 ```

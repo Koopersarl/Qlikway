@@ -1,0 +1,84 @@
+@page
+@model FtpBulkInsert.Pages.ManageModel
+@{
+    ViewData["Title"] = "Gestion des imports CSV";
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/manage.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Gestion des imports CSV</h1>
+            <p class="subtitle">Interface de gestion manuelle pour les imports FTP vers SQL Server</p>
+        </header>
+
+        <div class="grid">
+            <!-- Section Upload manuel -->
+            <div class="card">
+                <h2>📤 Upload manuel de fichiers CSV</h2>
+                <p>Uploadez un ou plusieurs fichiers CSV pour les importer directement dans la base de données.</p>
+
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="csvFiles">Sélectionner des fichiers CSV :</label>
+                        <input type="file" id="csvFiles" name="files" accept=".csv" multiple required>
+                        <small>Vous pouvez sélectionner plusieurs fichiers à la fois</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span id="uploadBtnText">Uploader et importer</span>
+                        <span id="uploadSpinner" class="spinner hidden"></span>
+                    </button>
+                </form>
+
+                <div id="uploadResult" class="result-box hidden"></div>
+            </div>
+
+            <!-- Section Déclenchement FTP -->
+            <div class="card">
+                <h2>🔄 Déclencher l'import FTP</h2>
+                <p>Lance le processus automatique qui récupère les fichiers CSV depuis le serveur FTP.</p>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="deleteAfterImport">
+                        Supprimer les fichiers du FTP après import
+                    </label>
+                </div>
+
+                <button id="ftpTriggerBtn" class="btn btn-secondary">
+                    <span id="ftpBtnText">Lancer l'import FTP</span>
+                    <span id="ftpSpinner" class="spinner hidden"></span>
+                </button>
+
+                <div id="ftpResult" class="result-box hidden"></div>
+            </div>
+        </div>
+
+        <!-- Section Logs -->
+        <div class="card logs-section">
+            <div class="logs-header">
+                <h2>📋 Historique des imports</h2>
+                <button id="refreshLogsBtn" class="btn btn-small">🔄 Rafraîchir</button>
+            </div>
+
+            <div id="logsContainer">
+                <div class="loading">Chargement des logs...</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>FTP Bulk Insert Application v1.0 | <a href="/swagger">API Documentation</a></p>
+        </footer>
+    </div>
+
+    <script src="~/js/manage.js"></script>
+</body>
+</html>

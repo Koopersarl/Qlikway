@@ -4,12 +4,15 @@ Application ASP.NET Core pour automatiser le téléchargement de fichiers CSV de
 
 ## 📋 Fonctionnalités
 
+- ✅ **Interface web de gestion** pour upload manuel et visualisation des logs
 - ✅ Téléchargement automatique de fichiers CSV depuis un serveur FTP
+- ✅ Upload manuel de fichiers CSV via l'interface web
 - ✅ Vidage automatique des tables avant insertion
 - ✅ Bulk insert optimisé dans SQL Server
 - ✅ Logging détaillé dans la table `UploadLog`
+- ✅ Visualisation en temps réel de l'historique des imports
 - ✅ API REST pour déclenchement via webhook (n8n, Zapier, etc.)
-- ✅ Authentification par clé API
+- ✅ Authentification par clé API pour l'API
 - ✅ Option de suppression des fichiers FTP après import
 
 ## 🏗️ Architecture
@@ -100,6 +103,37 @@ Modifiez le fichier `appsettings.json` avec vos paramètres :
    - Vérifiez que l'application utilise .NET 6.0
 
 ## 🚀 Utilisation
+
+### Interface web de gestion
+
+**Accéder à l'interface :** `https://votresite.com/manage`
+
+L'interface web vous permet de :
+
+#### 📤 Upload manuel de fichiers CSV
+1. Cliquez sur "Sélectionner des fichiers CSV"
+2. Choisissez un ou plusieurs fichiers CSV
+3. Cliquez sur "Uploader et importer"
+4. Les fichiers seront automatiquement importés dans les tables correspondantes
+
+#### 🔄 Déclencher l'import FTP manuellement
+1. Cochez "Supprimer les fichiers du FTP après import" si souhaité
+2. Cliquez sur "Lancer l'import FTP"
+3. L'application récupérera tous les fichiers CSV du serveur FTP et les importera
+
+#### 📋 Consulter l'historique
+- L'historique des imports s'affiche automatiquement en bas de la page
+- Cliquez sur "Rafraîchir" pour actualiser les logs
+- Vous pouvez voir pour chaque import :
+  - Date et heure
+  - Nom du fichier et de la table
+  - Nombre de lignes insérées
+  - Durée de l'opération
+  - Statut (succès/échec)
+
+### API REST (pour automatisation)
+
+L'application expose également une API REST pour l'automatisation via n8n ou autres outils.
 
 ### Endpoints disponibles
 

@@ -1,0 +1,28 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=sql123.smarterasp.net;Database=DB_123456_votredb;User Id=DB_123456_user;Password=VOTRE_MOT_DE_PASSE_SQL;TrustServerCertificate=True;Encrypt=True;"
+  },
+
+  "FtpSettings": {
+    "Server": "ftp://ftp123.smarterasp.net",
+    "Username": "votre-username-ftp",
+    "Password": "VOTRE_MOT_DE_PASSE_FTP",
+    "Path": "/csv"
+  },
+
+  "TempFolder": "D:\\Web\\temp\\FtpBulkInsert",
+
+  "ApiKey": "CHANGEZ_CETTE_CLE_PAR_QUELQUE_CHOSE_DE_SECURISE_123!",
+
+  "AutoCreateTables": false,
+
+  "SampleRowsForTypeDetection": 100
+}

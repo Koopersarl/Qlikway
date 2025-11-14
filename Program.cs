@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IFtpService, FtpService>();
 builder.Services.AddScoped<IBulkInsertService, BulkInsertService>();
 builder.Services.AddScoped<ILogService, LogService>();
+builder.Services.AddScoped<ITableSchemaService, TableSchemaService>();
 
 var app = builder.Build();
 

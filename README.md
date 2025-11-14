@@ -5,6 +5,7 @@ Application ASP.NET Core pour automatiser le téléchargement de fichiers CSV de
 ## 📋 Fonctionnalités
 
 - ✅ **Interface web de gestion** pour upload manuel et visualisation des logs
+- ✅ **Création automatique de tables** avec détection intelligente des types de colonnes
 - ✅ Téléchargement automatique de fichiers CSV depuis un serveur FTP
 - ✅ Upload manuel de fichiers CSV via l'interface web
 - ✅ Vidage automatique des tables avant insertion
@@ -46,6 +47,25 @@ Exécutez le script SQL suivant dans votre base de données :
 
 ### 2. Créer les tables de destination
 
+Vous avez deux options :
+
+#### Option A : Création automatique (recommandé pour dev/test) 🤖
+
+Activez `AutoCreateTables` dans `appsettings.json` :
+
+```json
+{
+  "AutoCreateTables": true,
+  "SampleRowsForTypeDetection": 100
+}
+```
+
+L'application analysera automatiquement vos fichiers CSV et créera les tables avec les types de colonnes appropriés.
+
+**📚 Documentation complète :** [AUTO_CREATE_TABLES.md](AUTO_CREATE_TABLES.md)
+
+#### Option B : Création manuelle (recommandé pour production)
+
 Pour chaque fichier CSV, créez une table correspondante. Le nom de la table doit correspondre au nom du fichier (sans l'extension .csv).
 
 **Exemple :**
@@ -79,7 +99,9 @@ Modifiez le fichier `appsettings.json` avec vos paramètres :
     "Path": "/csv"
   },
   "TempFolder": "D:\\Web\\temp\\FtpBulkInsert",
-  "ApiKey": "votre_cle_api_secrete_123"
+  "ApiKey": "votre_cle_api_secrete_123",
+  "AutoCreateTables": true,
+  "SampleRowsForTypeDetection": 100
 }
 ```
 

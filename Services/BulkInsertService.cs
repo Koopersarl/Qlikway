@@ -8,12 +8,21 @@ namespace FtpBulkInsert.Services
     {
         private readonly string _connectionString;
         private readonly ILogger<BulkInsertService> _logger;
+        private readonly ITableSchemaService _tableSchemaService;
+        private readonly bool _autoCreateTables;
+        private readonly int _sampleRowsForTypeDetection;
 
-        public BulkInsertService(IConfiguration configuration, ILogger<BulkInsertService> logger)
+        public BulkInsertService(
+            IConfiguration configuration,
+            ILogger<BulkInsertService> logger,
+            ITableSchemaService tableSchemaService)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection")
                 ?? throw new ArgumentNullException("ConnectionStrings:DefaultConnection");
             _logger = logger;
+            _tableSchemaService = tableSchemaService;
+            _autoCreateTables = configuration.GetValue<bool>("AutoCreateTables", false);
+            _sampleRowsForTypeDetection = configuration.GetValue<int>("SampleRowsForTypeDetection", 100);
         }
 
         public async Task<BulkInsertResult> ProcessFileAsync(string fileName, string localFilePath)
@@ -42,7 +51,22 @@ namespace FtpBulkInsert.Services
                 var tableExists = await CheckTableExistsAsync(connection, result.TableName);
                 if (!tableExists)
                 {
-                    throw new Exception($"La table {result.TableName} n'existe pas dans la base de données");
+                    if (_autoCreateTables)
+                    {
+                        _logger.LogInformation($"La table {result.TableName} n'existe pas. Création automatique...");
+
+                        // Analyser la structure du CSV
+                        var columns = await _tableSchemaService.AnalyzeCsvStructureAsync(localFilePath, _sampleRowsForTypeDetection);
+
+                        // Créer la table
+                        await _tableSchemaService.CreateTableAsync(result.TableName, columns);
+
+                        _logger.LogInformation($"Table {result.TableName} créée automatiquement avec {columns.Count} colonnes");
+                    }
+                    else
+                    {
+                        throw new Exception($"La table {result.TableName} n'existe pas dans la base de données. Activez 'AutoCreateTables' dans appsettings.json pour la créer automatiquement.");
+                    }
                 }
 
                 // Vider la table

@@ -146,7 +146,7 @@ Sur votre machine de développement, ouvrez le fichier `appsettings.json` et rem
     "Password": "VOTRE_MOT_DE_PASSE_FTP",
     "Path": "/csv"
   },
-  "TempFolder": "D:\\Web\\temp\\FtpBulkInsert",
+  "TempFolder": "temp",
   "ApiKey": "CHANGEZ_CETTE_CLE_PAR_QUELQUE_CHOSE_DE_SECURISE_123!",
   "AutoCreateTables": true,
   "SampleRowsForTypeDetection": 100
@@ -164,14 +164,17 @@ Sur votre machine de développement, ouvrez le fichier `appsettings.json` et rem
 | **FTP Server** | Serveur FTP | `ftp://ftp123.smarterasp.net` |
 | **FTP Username** | Utilisateur FTP | `votre-username-ftp` |
 | **FTP Password** | Mot de passe FTP | `VotreMotDePasseFTP!` |
-| **TempFolder** | Dossier temporaire sur le serveur | `D:\\Web\\temp\\FtpBulkInsert` |
+| **TempFolder** | Dossier temporaire | `temp` (recommandé pour hébergement mutualisé) |
 | **ApiKey** | Clé secrète pour l'API | `MonSuperSecret2024!` |
 | **AutoCreateTables** | Création auto des tables | `true` (dev) ou `false` (prod) |
 
 ### 3.3 Notes importantes
 
-- **TempFolder** : Le chemin `D:\\Web\\temp\\FtpBulkInsert` est généralement correct sur SmarterASP
-  - Si cela ne fonctionne pas, essayez : `D:\\Web\\VOTRE_USERNAME\\temp\\FtpBulkInsert`
+- ⚠️ **IMPORTANT pour hébergement mutualisé SmarterASP** : Utilisez `"TempFolder": "temp"` (chemin relatif)
+  - L'application créera automatiquement un dossier `temp` dans `/wwwroot`
+  - Ce dossier est protégé contre l'accès HTTP via `web.config`
+  - **NE PAS utiliser** `D:\\Web\\temp\\` sur un hébergement mutualisé (accès refusé)
+  - 📚 **Pour plus de détails, consultez :** `SMARTERASP_TEMPFOLDER_FIX.md`
 - **ApiKey** : Générez une clé forte, par exemple avec : https://passwordsgenerator.net/
 - **AutoCreateTables** :
   - `true` : Les tables sont créées automatiquement (pratique pour débuter)

@@ -18,7 +18,7 @@
     "Path": "/csv"
   },
 
-  "TempFolder": "D:\\Web\\temp\\FtpBulkInsert",
+  "TempFolder": "temp",
 
   "ApiKey": "CHANGEZ_CETTE_CLE_PAR_QUELQUE_CHOSE_DE_SECURISE_123!",
 
